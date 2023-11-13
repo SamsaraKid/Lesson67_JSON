@@ -92,7 +92,7 @@ function f3(){
 }
 
 function secret(key, value){
-    if (key !== 'agent' && (typeof value == "string" || typeof value == "number")){
+    if (key !== 'agent' && typeof value !== "object"){
         return '*****'
     }
     return value
