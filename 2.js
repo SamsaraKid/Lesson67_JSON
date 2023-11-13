@@ -1,8 +1,10 @@
 let but1 = document.getElementById('but1')
 let but2 = document.getElementById('but2')
+let but3 = document.getElementById('but3')
 
 but1.onclick = f1
 but2.onclick = f2
+but3.onclick = f3
 
 function f1(){
     let req
@@ -61,4 +63,37 @@ function f2(){
     }
 
     req.send()
+}
+
+
+//=======================================
+
+
+function f3(){
+    let req
+    if (window.XMLHttpRequest){
+        req = new XMLHttpRequest()
+    } else{
+        req = new ActiveXObject("Microsoft.XMLHTTP")
+    }
+
+    req.open('GET', 'agent.json')
+    req.onload = function (){
+        if (req.status === 200){
+            let newobj = JSON.parse(req.response, secret)
+            console.log(newobj)
+        } else {
+            console.log('no data')
+        }
+
+    }
+
+    req.send()
+}
+
+function secret(key, value){
+    if (key !== 'agent' && (typeof value == "string" || typeof value == "number")){
+        return '*****'
+    }
+    return value
 }
